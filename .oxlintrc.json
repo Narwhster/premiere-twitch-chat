@@ -1,0 +1,155 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "import", "react", "unicorn", "oxc", "vitest", "promise"],
+  "jsPlugins": ["oxlint-plugin-effect/plugin", "./lint/plugin.ts"],
+  "categories": {
+    "correctness": "error"
+  },
+  "options": {
+    "typeAware": true,
+    "typeCheck": true
+  },
+  "rules": {
+    "typescript/no-explicit-any": "error",
+    "typescript/no-unsafe-argument": "error",
+    "typescript/no-unsafe-assignment": "error",
+    "typescript/no-unsafe-call": "error",
+    "typescript/no-unsafe-member-access": "error",
+    "typescript/no-unsafe-return": "error",
+    "typescript/no-non-null-assertion": "error",
+    "typescript/no-misused-promises": "error",
+    "typescript/switch-exhaustiveness-check": "error",
+    "typescript/strict-boolean-expressions": [
+      "error",
+      {
+        "allowString": false,
+        "allowNumber": false,
+        "allowNullableObject": false
+      }
+    ],
+    "typescript/no-unnecessary-condition": "error",
+    "typescript/no-deprecated": "error",
+    "typescript/consistent-type-imports": "error",
+    "typescript/ban-ts-comment": "error",
+    "import/no-cycle": "error",
+    "import/no-default-export": "error",
+    "no-param-reassign": "error",
+    "no-empty": "error",
+    "oxc/no-accumulating-spread": "error",
+    "eqeqeq": "error",
+    "local/no-comments": "error",
+    "local/no-test-without-assertion": "error",
+    "react/rules-of-hooks": "error",
+    "complexity": ["error", { "max": 21 }],
+    "effect/maxCognitiveComplexity": ["error", { "max": 21 }],
+    "effect/noArrayFilterMap": "error",
+    "effect/noAs": "error",
+    "effect/noChainedTypeAssertions": "error",
+    "effect/noConditionalEmptyObjectSpread": "error",
+    "effect/noDynamicImports": "error",
+    "effect/noFixedWaitInTests": "error",
+    "effect/noKnownValueWidening": "error",
+    "effect/noLocaleCompare": "error",
+    "effect/noModuleLevelMutableState": "error",
+    "effect/noModuleMocks": "error",
+    "effect/noNewError": "error",
+    "effect/noObjectParameters": "error",
+    "effect/noReduceAccumulatorCopy": "error",
+    "effect/noReflectApply": "error",
+    "effect/noReflectGet": "error",
+    "effect/noRepoTempDirectory": "error",
+    "effect/noRuntimeTypeof": "error",
+    "effect/noShapeInSymbolNames": "error",
+    "effect/noSharedTestHome": "error",
+    "effect/noTestGlobals": "error",
+    "effect/noThrowStatement": "error",
+    "effect/noTryCatch": "error",
+    "effect/noUnknownParameters": "error",
+    "effect/noUnknownReturns": "error",
+    "effect/noUnknownTypeAliases": "error",
+    "effect/noUnsafeDictionaryType": "error",
+    "effect/noWidenThenAssert": "error",
+    "effect/requireSuppressionReason": "error"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.ts", "**/*.test-d.ts"],
+      "rules": {
+        "vitest/no-restricted-matchers": [
+          "error",
+          {
+            "toBeDefined": "A defined value is not the expected result. Assert what the caller gets.",
+            "toBeTruthy": "A truthy value is not the expected result. Assert what the caller gets.",
+            "toBeFalsy": "It passes for an empty result. Assert the literal value the caller gets.",
+            "toHaveBeenCalled": "It checks how the code works inside. Assert what the caller observes.",
+            "toHaveBeenCalledTimes": "It checks how the code works inside. Assert what the caller observes.",
+            "toMatchSnapshot": "A snapshot records whatever the code did. Write the expected value by hand.",
+            "toMatchInlineSnapshot": "A snapshot records whatever the code did. Write the expected value by hand."
+          }
+        ],
+        "vitest/no-standalone-expect": "error",
+        "vitest/expect-expect": "off",
+        "vitest/valid-expect": [
+          "error",
+          {
+            "maxArgs": 2
+          }
+        ],
+        "vitest/no-restricted-vi-methods": [
+          "error",
+          {
+            "mock": "Run the real code, or pass a fake gadget with the same capabilities.",
+            "spyOn": "Run the real code, or pass a fake gadget with the same capabilities."
+          }
+        ],
+        "promise/prefer-await-to-then": "error",
+        "vitest/no-hooks": "error"
+      }
+    },
+    {
+      "files": ["**/*.test.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "vitest",
+                "importNames": ["expectTypeOf", "assertType"],
+                "message": "A compile-time check belongs in a *.test-d.ts file, which Vitest type-checks and never runs."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["**/*.test-d.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": [
+              {
+                "name": "vitest",
+                "importNames": ["expect", "assert"],
+                "message": "Vitest never runs a *.test-d.ts file. Use expectTypeOf or assertType, or move this to a *.test.ts file."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "vite.config.ts",
+        "vitest.config.ts",
+        "webview-ui/vite.config.ts",
+        "lint/plugin.ts"
+      ],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    }
+  ]
+}

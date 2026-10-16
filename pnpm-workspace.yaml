@@ -1,0 +1,4 @@
+packages:
+  - webview-ui
+allowBuilds:
+  esbuild@0.25.5: true

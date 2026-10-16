@@ -1,0 +1,46 @@
+{
+  "name": "com.narwhster.premiere-twitch-chat",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "author": "Narwhster",
+  "type": "module",
+  "scripts": {
+    "dev": "cross-env MODE=dev vite build --watch",
+    "build": "cross-env MODE=build vite build",
+    "ccx": "cross-env MODE=package vite build",
+    "ccx-install": "cross-env BOLT_ACTION=ccx-install vite",
+    "ccx-uninstall": "cross-env BOLT_ACTION=ccx-uninstall vite",
+    "check": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run repo-check",
+    "typecheck": "tsc --project tsconfig.json && tsc --project webview-ui/tsconfig.json",
+    "lint": "oxlint --deny-warnings",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "test": "vitest run --config vitest.config.ts",
+    "repo-check": "node lint/repo-check.entry.ts"
+  },
+  "dependencies": {
+    "base64-js": "^1.5.1",
+    "comlink": "^4.4.2"
+  },
+  "devDependencies": {
+    "@adobe/premierepro": "26.5.0",
+    "@oxlint/plugins": "1.88.0",
+    "@types/node": "^24.19.2",
+    "@vitest/browser-playwright": "^5.0.5",
+    "cross-env": "^7.0.3",
+    "oxfmt": "^0.73.0",
+    "oxlint": "^1.88.0",
+    "oxlint-plugin-effect": "0.28.1",
+    "oxlint-tsgolint": "^7.0.2004",
+    "playwright": "^1.64.1",
+    "typescript": "^7.0.2",
+    "vite": "^6.3.5",
+    "vite-uxp-plugin": "^1.3.8",
+    "vitest": "^5.0.4"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "packageManager": "pnpm@12.11.2"
+}

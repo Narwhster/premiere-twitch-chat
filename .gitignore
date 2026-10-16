@@ -1,0 +1,11 @@
+node_modules
+dist
+ccx
+public/webview-ui
+.DS_Store
+*.log
+.env
+vite.config.ts.timestamp*
+.vscode/*
+!.vscode/launch.json
+.vitest
